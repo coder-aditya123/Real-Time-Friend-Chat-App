@@ -1,3 +1,4 @@
+// App.jsx (कोई बदलाव नहीं)
 import React, { useContext } from 'react'
 import { Navigate, Route, Routes } from 'react-router-dom'
 import HomePage from './pages/HomePage'

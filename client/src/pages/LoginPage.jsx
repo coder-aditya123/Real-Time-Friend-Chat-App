@@ -1,8 +1,9 @@
+// client/src/pages/LoginPage.jsx
 import React, { useContext, useState } from "react";
 import assets from "../assets/assets";
-import toast from "react-hot-toast"; // Import toast
+import toast from "react-hot-toast";
 import { AuthContext } from "../../context/AuthContext";
-import { useNavigate } from "react-router-dom";  // <-- Added import
+import { useNavigate } from "react-router-dom";
 
 const LoginPage = () => {
   const [currState, setCurrState] = useState("Sign up");
@@ -14,7 +15,7 @@ const LoginPage = () => {
   const [agree, setAgree] = useState(false);
 
   const { login } = useContext(AuthContext);
-  const navigate = useNavigate(); // <-- Added navigate hook
+  const navigate = useNavigate();
 
   const onSubmitHandler = async (event) => {
     event.preventDefault();
@@ -38,7 +39,7 @@ const LoginPage = () => {
         }
         const success = await login("signup", { fullName, email, password, bio });
         if (success) {
-          navigate("/");  // <-- Redirect on successful signup
+          navigate("/"); // Redirect on successful signup
         }
       }
     } else {
@@ -48,7 +49,7 @@ const LoginPage = () => {
       }
       const success = await login("login", { email, password });
       if (success) {
-        navigate("/profile");  // <-- Redirect on successful login
+        navigate("/"); // Redirect on successful login (changed from /profile to /)
       }
     }
   };
@@ -59,15 +60,15 @@ const LoginPage = () => {
       <img
         src={assets.logo_big}
         alt="logo"
-        className="w-[min(40vw,180px)] max-w-[200px]"
+        className="w-[min(40vw,180px)] max-w-[200px] md:max-w-[250px] lg:max-w-[300px]" // Responsive logo size
       />
 
       {/* --------right-------- */}
       <form
         onSubmit={onSubmitHandler}
-        className="border-2 bg-white/8 text-white border-gray-500 p-6 flex flex-col gap-6 rounded-lg shadow-lg max-w-sm w-full"
+        className="border-2 bg-white/8 text-white border-gray-500 p-6 flex flex-col gap-6 rounded-lg shadow-lg max-w-sm w-full md:p-8" // Responsive padding
       >
-        <h2 className="font-medium text-2xl flex justify-between items-center">
+        <h2 className="font-medium text-2xl md:text-3xl flex justify-between items-center"> {/* Responsive text size */}
           {currState}
           {isDataSubmitted && (
             <img
@@ -84,7 +85,7 @@ const LoginPage = () => {
             onChange={(e) => setFullName(e.target.value)}
             value={fullName}
             type="text"
-            className="p-2 border border-gray-500 rounded-md focus:outline-none"
+            className="p-2 border border-gray-500 rounded-md focus:outline-none bg-transparent text-white placeholder-gray-400 md:p-3" // Responsive padding, transparent bg
             placeholder="Full Name"
             required
           />
@@ -98,7 +99,7 @@ const LoginPage = () => {
               type="email"
               placeholder="Email Address"
               required
-              className="p-2 border border-gray-500 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500"
+              className="p-2 border border-gray-500 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500 bg-transparent text-white placeholder-gray-400 md:p-3" // Responsive padding, transparent bg
             />
             <input
               onChange={(e) => setPassword(e.target.value)}
@@ -106,7 +107,7 @@ const LoginPage = () => {
               type="password"
               placeholder="Password"
               required
-              className="p-2 border border-gray-500 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500"
+              className="p-2 border border-gray-500 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500 bg-transparent text-white placeholder-gray-400 md:p-3" // Responsive padding, transparent bg
             />
           </>
         )}
@@ -116,7 +117,7 @@ const LoginPage = () => {
             onChange={(e) => setBio(e.target.value)}
             value={bio}
             rows={4}
-            className="p-2 border border-gray-500 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500"
+            className="p-2 border border-gray-500 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500 bg-transparent text-white placeholder-gray-400 md:p-3" // Responsive padding, transparent bg
             placeholder="Provide a short bio..."
             required
           ></textarea>
@@ -124,7 +125,7 @@ const LoginPage = () => {
 
         <button
           type="submit"
-          className="py-3 bg-gradient-to-r from-purple-400 to-violet-600 text-white rounded-md cursor-pointer"
+          className="py-3 bg-gradient-to-r from-purple-400 to-violet-600 text-white rounded-md cursor-pointer text-lg md:text-xl" // Responsive text size
         >
           {currState === "Sign up" && !isDataSubmitted
             ? "Create Account"
@@ -133,16 +134,17 @@ const LoginPage = () => {
             : "Login Now"}
         </button>
 
-        <div className="flex items-center gap-2 text-sm text-gray-500">
+        <div className="flex items-center gap-2 text-sm text-gray-400 md:text-base"> {/* Responsive text size */}
           <input
             type="checkbox"
             checked={agree}
             onChange={(e) => setAgree(e.target.checked)}
+            className="w-4 h-4 md:w-5 md:h-5" // Responsive checkbox size
           />
           <p>Agree to the terms of use & privacy policy</p>
         </div>
 
-        <div className="text-sm text-center text-white">
+        <div className="text-sm text-center text-white md:text-base"> {/* Responsive text size */}
           {currState === "Sign up" ? (
             <>
               Already have an account?{" "}
